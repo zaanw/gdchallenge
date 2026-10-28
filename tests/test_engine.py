@@ -122,6 +122,13 @@ class ExportTests(unittest.TestCase):
         self.assertEqual(raw,(self.output/'ABSOLUTE_COLLAPSE.level').read_text())
         self.assertEqual(len(decode_raw(raw)[1]),self.report['objects'])
         self.assertTrue((self.output/'ABSOLUTE_COLLAPSE.gmd').read_bytes().startswith(b'<?xml'))
+        # Independent importer-style extraction: k4 must itself contain objects.
+        import xml.etree.ElementTree as ET
+        entries=list(ET.parse(self.output/'ABSOLUTE_COLLAPSE.gmd').getroot().find('dict/dict'))
+        k4=next(entries[i+1].text for i in range(0,len(entries),2) if entries[i].text=='k4')
+        self.assertTrue(k4.startswith('kA2,'))
+        self.assertEqual(len(k4.split(';')[1:-1]),self.report['objects'])
+        self.assertTrue(all(part.startswith('1,') for part in k4.split(';')[1:-1]))
 
     def test_zip_integrity_and_actual_members(self):
         with zipfile.ZipFile(self.output/'ABSOLUTE_COLLAPSE.zip') as z:
@@ -147,7 +154,7 @@ class ExportTests(unittest.TestCase):
     def test_corrupt_payload_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             target=Path(directory)/'bad.gmd'
-            data=(self.output/'ABSOLUTE_COLLAPSE.gmd').read_bytes().replace(b'H4sI',b'XXXX',1)
+            data=(self.output/'ABSOLUTE_COLLAPSE.gmd').read_bytes().replace(b'kA2,0',b'BROKEN',1)
             target.write_bytes(data)
             with self.assertRaises((ValueError,OSError,EOFError)): read_gmd(target)
 

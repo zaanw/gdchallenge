@@ -7,7 +7,7 @@
    **2.281 has not been verified** in this environment.
 3. Use GDShare's level import action and select `ABSOLUTE_COLLAPSE.gmd`.
    This is compact XML/plist, not JSON and not a renamed ZIP. The `root` dictionary
-   contains gzip+URL-safe-base64 `k4` editor object data. It is an unverified editable level.
+   contains the complete uncompressed editor object stream in `k4`. It is an unverified editable level.
 4. If your importer rejects this file, keep `ABSOLUTE_COLLAPSE.level`: it contains
    the uncompressed editor header and semicolon-delimited object stream. Use an
    importer that explicitly supports raw level strings, or regenerate the XML using:

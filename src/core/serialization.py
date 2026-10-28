@@ -1,4 +1,4 @@
-"""GDShare-compatible compact XML/plist, with gzip+URL-safe base64 k4.
+"""GDShare compact XML/plist with the uncompressed editor object stream in k4.
 See docs/format_sources.md. No savefile injection or verification flags.
 """
 import base64
@@ -50,7 +50,8 @@ def decode_raw(raw):
 
 def export_gmd(level, path):
     raw=encode_raw(level)
-    payload=base64.urlsafe_b64encode(gzip.compress(raw.encode(),mtime=0)).decode()
+    # GDShare assigns k4 to m_levelString; editor data must be directly readable.
+    payload=raw
     plist=ET.Element('plist',version='1.0',gjver='2.0')
     outer=ET.SubElement(plist,'dict')
     ET.SubElement(outer,'k').text='root'
@@ -72,7 +73,10 @@ def read_gmd(path):
     if data is None: raise ValueError('Missing dictionary')
     children=list(data)
     fields={children[i].text:children[i+1].text for i in range(0,len(children),2)}
-    raw=gzip.decompress(base64.b64decode(fields['k4'],altchars=b'-_',validate=True)).decode()
+    raw=fields['k4']
+    if not raw.startswith('kA'):
+        # Read earlier compressed exports for migration, but never write them.
+        raw=gzip.decompress(base64.b64decode(raw,altchars=b'-_',validate=True)).decode()
     decode_raw(raw)
     return fields,raw
 
@@ -85,5 +89,5 @@ def convert(raw_path,gmd_path,name='ABSOLUTE COLLAPSE'):
     export_gmd(level,gmd_path)
     tree=ET.parse(gmd_path)
     for key,value in zip(list(tree.getroot().find('dict/dict'))[::2],list(tree.getroot().find('dict/dict'))[1::2]):
-        if key.text == 'k4': value.text=base64.urlsafe_b64encode(gzip.compress(raw.encode(),mtime=0)).decode()
+        if key.text == 'k4': value.text=raw
     Path(gmd_path).write_bytes(b'<?xml version="1.0"?>\n'+ET.tostring(tree.getroot()))

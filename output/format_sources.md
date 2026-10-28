@@ -34,5 +34,6 @@ properties fail validation. This validates the supported subset, not arbitrary G
 The compact XML dialect uses `<k>`, `<s>`, `<i>`, `<t/>`, `<f/>`, with
 `<plist version="1.0" gjver="2.0"><dict><k>root</k><dict>…`.
 `kCEK=4`, `k21=2` (editor), `k14=false` (not verified), `k48=object count`.
-`k4` is deterministic gzip (mtime=0), URL-safe base64. No secret, account credential,
+`k4` directly contains the uncompressed, semicolon-delimited editor object stream.
+This avoids importers treating compressed base64 as an empty object list. No secret, account credential,
 server difficulty/rating or fabricated song ID is written.

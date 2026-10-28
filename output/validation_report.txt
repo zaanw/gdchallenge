@@ -1,7 +1,7 @@
 ABSOLUTE COLLAPSE — validation
 PASS_CONSERVATIVE_MODEL
 Objects: 2290; swept segments: 10560
-XML, gzip/base64 and object stream round-trip: PASS
+XML and uncompressed embedded object stream round-trip: PASS
 Geometry errors: []
 
 LIMITATIONS

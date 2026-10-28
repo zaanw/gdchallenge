@@ -107,7 +107,7 @@ def generate(output):
     (output/'validation_report.txt').write_text(
         'ABSOLUTE COLLAPSE — validation\n'+report['status']+'\n'+
         f"Objects: {len(level.objects)}; swept segments: {len(level.trajectory)-1}\n"+
-        'XML, gzip/base64 and object stream round-trip: PASS\n'+
+        'XML and uncompressed embedded object stream round-trip: PASS\n'+
         'Geometry errors: '+str(report['errors'])+'\n\nLIMITATIONS\n'+
         '\n'.join(report['limitations'])+'\n')
     with (output/'trajectory.csv').open('w',newline='') as f:
