@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Rupture",
+    "mode": "cube",
+    "start": 0,
+    "end": 4.4,
+    "mini": false,
+    "gap": 80
+  },
+  {
+    "name": "Needle ignition",
+    "mode": "wave",
+    "start": 4.4,
+    "end": 11.0,
+    "mini": true,
+    "gap": 36
+  },
+  {
+    "name": "Crimson interference",
+    "mode": "wave",
+    "start": 11.0,
+    "end": 17.6,
+    "mini": false,
+    "gap": 44
+  },
+  {
+    "name": "Event horizon",
+    "mode": "ship",
+    "start": 17.6,
+    "end": 24.200000000000003,
+    "mini": false,
+    "gap": 68
+  },
+  {
+    "name": "Oblique fracture",
+    "mode": "wave",
+    "start": 24.200000000000003,
+    "end": 30.799999999999997,
+    "mini": false,
+    "gap": 40
+  },
+  {
+    "name": "Zero tolerance",
+    "mode": "wave",
+    "start": 30.799999999999997,
+    "end": 37.4,
+    "mini": false,
+    "gap": 34
+  },
+  {
+    "name": "Collapse gauntlet",
+    "mode": "wave",
+    "start": 37.4,
+    "end": 44,
+    "mini": false,
+    "gap": 38
+  }
+]

@@ -1,0 +1,15 @@
+ABSOLUTE COLLAPSE — validation
+PASS_CONSERVATIVE_MODEL
+Objects: 2290; swept segments: 10560
+XML, gzip/base64 and object stream round-trip: PASS
+Geometry errors: []
+
+LIMITATIONS
+GD 2.281 executable unavailable: real hitboxes, portal activation, camera and end timing untested.
+Cube/ship are assumed ballistic and acceleration models; wave uses nominal slopes 1 and 2.
+Swept AABB envelope test proves this model path avoids static solids only.
+Portal entry and size changes require manual in-game testing; no exact transition physics.
+44s traversal estimate excludes automatic end-screen travel and engine-specific speed deviations.
+Creo — Flow audio not included; no verified Newgrounds ID, offset or beat analysis.
+140 BPM provisional effect grid is not a claim about the song tempo.
+TOP 1 is a design target, requiring human difficulty assessment and verification.

@@ -1,0 +1,124 @@
+{
+  "status": "PASS_CONSERVATIVE_MODEL",
+  "errors": [],
+  "objects": 2290,
+  "solid_objects": 1464,
+  "samples": 10561,
+  "sample_rate_hz": 240,
+  "duration_model_seconds": 44.0,
+  "obstacle_envelope_overlaps": 0,
+  "contacts": [],
+  "minimum_ground_clearance": 0.0,
+  "transitions": [
+    {
+      "time": 4.4,
+      "from": "cube",
+      "to": "wave",
+      "geometry_continuous": true
+    },
+    {
+      "time": 11.0,
+      "from": "wave",
+      "to": "wave",
+      "geometry_continuous": true
+    },
+    {
+      "time": 17.6,
+      "from": "wave",
+      "to": "ship",
+      "geometry_continuous": true
+    },
+    {
+      "time": 24.200000000000003,
+      "from": "ship",
+      "to": "wave",
+      "geometry_continuous": true
+    },
+    {
+      "time": 30.799999999999997,
+      "from": "wave",
+      "to": "wave",
+      "geometry_continuous": true
+    },
+    {
+      "time": 37.4,
+      "from": "wave",
+      "to": "wave",
+      "geometry_continuous": true
+    }
+  ],
+  "exact_gd_physics_verified": false,
+  "game_import_tested": false,
+  "music_synchronized": false,
+  "top1_difficulty_verified": false,
+  "limitations": [
+    "GD 2.281 executable unavailable: real hitboxes, portal activation, camera and end timing untested.",
+    "Cube/ship are assumed ballistic and acceleration models; wave uses nominal slopes 1 and 2.",
+    "Swept AABB envelope test proves this model path avoids static solids only.",
+    "Portal entry and size changes require manual in-game testing; no exact transition physics.",
+    "44s traversal estimate excludes automatic end-screen travel and engine-specific speed deviations.",
+    "Creo \u2014 Flow audio not included; no verified Newgrounds ID, offset or beat analysis.",
+    "140 BPM provisional effect grid is not a claim about the song tempo.",
+    "TOP 1 is a design target, requiring human difficulty assessment and verification."
+  ],
+  "export_roundtrip": "PASS",
+  "level_sha256": "6e5b6bcd237199b1d2b6ce9312071c27b30ee5862ef95ea3b7fc34b0f5db36e7",
+  "sections": [
+    {
+      "name": "Rupture",
+      "mode": "cube",
+      "start": 0,
+      "end": 4.4,
+      "mini": false,
+      "gap": 80
+    },
+    {
+      "name": "Needle ignition",
+      "mode": "wave",
+      "start": 4.4,
+      "end": 11.0,
+      "mini": true,
+      "gap": 36
+    },
+    {
+      "name": "Crimson interference",
+      "mode": "wave",
+      "start": 11.0,
+      "end": 17.6,
+      "mini": false,
+      "gap": 44
+    },
+    {
+      "name": "Event horizon",
+      "mode": "ship",
+      "start": 17.6,
+      "end": 24.200000000000003,
+      "mini": false,
+      "gap": 68
+    },
+    {
+      "name": "Oblique fracture",
+      "mode": "wave",
+      "start": 24.200000000000003,
+      "end": 30.799999999999997,
+      "mini": false,
+      "gap": 40
+    },
+    {
+      "name": "Zero tolerance",
+      "mode": "wave",
+      "start": 30.799999999999997,
+      "end": 37.4,
+      "mini": false,
+      "gap": 34
+    },
+    {
+      "name": "Collapse gauntlet",
+      "mode": "wave",
+      "start": 37.4,
+      "end": 44,
+      "mini": false,
+      "gap": 38
+    }
+  ]
+}
