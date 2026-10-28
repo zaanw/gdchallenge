@@ -128,7 +128,9 @@ def generate(output):
             info=zipfile.ZipInfo(name,date_time=(2026,1,1,0,0,0))
             info.compress_type=zipfile.ZIP_DEFLATED
             z.writestr(info,(output/name).read_bytes())
-        z.writestr('README.md',(instructions.parent.parent/'README.md').read_text())
+        readme_info=zipfile.ZipInfo('README.md',date_time=(2026,1,1,0,0,0))
+        readme_info.compress_type=zipfile.ZIP_DEFLATED
+        z.writestr(readme_info,(instructions.parent.parent/'README.md').read_text())
     with zipfile.ZipFile(output/'ABSOLUTE_COLLAPSE.zip') as z:
         if z.testzip() is not None or not set(members)<=set(z.namelist()):
             raise ValueError('Invalid release archive')
