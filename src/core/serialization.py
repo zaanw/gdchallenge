@@ -55,7 +55,8 @@ def export_gmd(level, path):
     plist=ET.Element('plist',version='1.0',gjver='2.0')
     outer=ET.SubElement(plist,'dict')
     ET.SubElement(outer,'k').text='root'
-    data=ET.SubElement(outer,'dict')
+    # Compact gjver=2.0 uses <d> for nested dictionaries, not <dict>.
+    data=ET.SubElement(outer,'d')
     fields={'kCEK':( 'i',4),'k2':('s',level.name),'k4':('s',payload),
             'k5':('s','GD Challenge Engine'),'k14':('f',None),
             'k21':('i',2),'k48':('i',len(level.objects))}
@@ -69,7 +70,8 @@ def read_gmd(path):
     tree=ET.parse(path)
     outer=tree.getroot().find('dict')
     if outer is None or outer.findtext('k') != 'root': raise ValueError('Missing root')
-    data=outer.find('dict')
+    data=outer.find('d')
+    if data is None: data=outer.find('dict')
     if data is None: raise ValueError('Missing dictionary')
     children=list(data)
     fields={children[i].text:children[i+1].text for i in range(0,len(children),2)}
@@ -88,6 +90,6 @@ def convert(raw_path,gmd_path,name='ABSOLUTE COLLAPSE'):
     level=Level(name=name,objects=objects)
     export_gmd(level,gmd_path)
     tree=ET.parse(gmd_path)
-    for key,value in zip(list(tree.getroot().find('dict/dict'))[::2],list(tree.getroot().find('dict/dict'))[1::2]):
+    for key,value in zip(list(tree.getroot().find('dict/d'))[::2],list(tree.getroot().find('dict/d'))[1::2]):
         if key.text == 'k4': value.text=raw
     Path(gmd_path).write_bytes(b'<?xml version="1.0"?>\n'+ET.tostring(tree.getroot()))

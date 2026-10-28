@@ -32,8 +32,17 @@ alone receives Move/Alpha. Pulse targets existing color channels. Unknown IDs an
 properties fail validation. This validates the supported subset, not arbitrary GD levels.
 
 The compact XML dialect uses `<k>`, `<s>`, `<i>`, `<t/>`, `<f/>`, with
-`<plist version="1.0" gjver="2.0"><dict><k>root</k><dict>…`.
+`<plist version="1.0" gjver="2.0"><dict><k>root</k><d>…`.
 `kCEK=4`, `k21=2` (editor), `k14=false` (not verified), `k48=object count`.
 `k4` directly contains the uncompressed, semicolon-delimited editor object stream.
 This avoids importers treating compressed base64 as an empty object list. No secret, account credential,
 server difficulty/rating or fabricated song ID is written.
+
+## Empty-import fix
+
+The initial exports incorrectly mixed compact scalar tags with a long nested
+`<dict>` tag. In the gjver=2.0 compact dialect, nested dictionaries must use `<d>`.
+This is corroborated by `gd/plist.py:dump_item_short` in gd.py: only the outermost
+dictionary uses `<dict>`. The regenerated standalone `.gmd` uses `<d>` for `root`
+and embeds all 2,290 objects in `k4`. Sidecar reports and trajectories are not
+level dependencies and are not needed for import. Live game testing remains pending.
